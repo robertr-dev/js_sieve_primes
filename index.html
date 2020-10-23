@@ -24,7 +24,7 @@
 		<h1>Sieve of Eratosthenes App</h1>
 		<i>by Robert Rutter</i>
 		<p>
-			JavaScript app that uses a recursive function generate positive integers into an array. Uses the Sieve of Eratosthenes algorithm to detect and remove non-prime numbers from that array.
+		JavaScript app that uses a recursive function generate positive integers into an array. Uses the Sieve of Eratosthenes algorithm to detect and remove non-prime numbers from that array.
 		</p>
 	</center>
 
@@ -60,9 +60,13 @@
 		//function to remove array values that are equal to multiple of check value
 		function removePrimes() {
 
-			//bubblesort-like array to check every element of array adequately
+			//bubblesort-like function to check every element of array adequately
 			for(var m = 0; m < arraySize; m++) {
 				for(var n = 0; n < arraySize; n++) {
+					//remove one
+				    		if(primeArray[n] == 1) {
+						delete primeArray[n];
+					}
 					//if the current array value is equal to a multiple of currentCheck and is not currentCheck
 					if((primeArray[n] % currentCheck) == 0 && primeArray[n] != currentCheck) {
 						//remove the array value
