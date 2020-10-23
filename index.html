@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sieve Prime Number Calculator</title>
+	<style type="text/css">
+		body {
+			font-family: "Courier New", Courier, monospace;
+			background-color: #ccc;
+		}
+		a {
+			font-size: 2em;
+		}
+		#footer {
+			font-size: .8em;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+
+	<center>
+		-> <a href="https://rrdev.tech/" target="_blank">rrdev.tech</a> <-
+		<hr />
+		<h1>Sieve of Eratosthenes App</h1>
+		<i>by Robert Rutter</i>
+		<p>
+			JavaScript app that uses a recursive function generate positive integers into an array. Uses the Sieve of Eratosthenes algorithm to detect and remove non-prime numbers from that array.
+		</p>
+	</center>
+
+	<hr/>
+
+	<script>
+		//array size and array declaration
+		let arraySize = 1000;
+		let numberArray = [arraySize];
+		let primeArray = [arraySize];
+		
+		//counter for recursive call
+		let i = 0;
+
+		//recursive function to generate numbers into array
+		function addNumber() {
+			//base case
+			if(i < arraySize) {
+				//starting with 1, assign array value to current incrementation
+				numberArray[i] = i + 1;
+
+				//increment to prevent stack overflow
+				i++;
+
+				//recursive call
+				addNumber(i);
+			}
+		}
+
+		//start multiple check with 2 (the first prime number)
+		var currentCheck = 2;
+
+		//function to remove array values that are equal to multiple of check value
+		function removePrimes() {
+
+			//bubblesort-like array to check every element of array adequately
+			for(var m = 0; m < arraySize; m++) {
+				for(var n = 0; n < arraySize; n++) {
+					//if the current array value is equal to a multiple of currentCheck and is not currentCheck
+					if((primeArray[n] % currentCheck) == 0 && primeArray[n] != currentCheck) {
+						//remove the array value
+						delete primeArray[n];
+					}
+				}
+				//increment currentCheck
+				currentCheck++;
+			}
+		}
+
+		//call to recursive function to start generating numbers into array
+		addNumber();
+
+		//copy numberArray values into primeArray
+		primeArray = Array.from(numberArray);
+
+		//call removePrimes function to remove prime numbers from primeArray
+		removePrimes();
+
+		document.write(`<h1>Array of positive integers:</h1><br/>`);
+
+		//loop to print numberArray
+		for(var j = 0; j < arraySize; j++) {
+			document.write(`${numberArray[j]} `);
+		}
+
+		document.write(`<br/><br/>`);
+
+		document.write(`<h1>Prime numbers within array:</h1><br/>`);
+
+		//loop to print primeArray
+		for(var l = 0; l < arraySize; l++) {
+			if(primeArray[l] != null) {
+				document.write(`${primeArray[l]} `);
+			}
+		}
+	</script>
+	
+	<hr />
+	<div id="footer">
+		This project is the intellectual property of the owner.
+	</div>
+</body>
+</html>
